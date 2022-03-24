@@ -51,6 +51,17 @@ $container->set(
 
 $application = new Application($container);
 
+use Phalcon\Session\Manager;
+use Phalcon\Session\Adapter\Stream;
+
+$container->setShared('session', function () {
+    $session = new Manager();
+    $files = new Stream([
+        'savePath' => '/tmp',
+    ]);
+    $session->setAdapter($files)->start();
+    return $session;
+});
 
 
 $container->set(

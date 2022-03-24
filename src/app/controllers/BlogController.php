@@ -16,12 +16,11 @@ class BlogController extends Controller
     }
     public function postCommentAction($post_id)
     {
-        if (!isset($_SESSION['user'])) {
+        if (!isset($this->session->id)) {
             header("location:http://localhost:8080/login");
         }
         $comment = new Comments();
-        die($_SESSION['user']['id']);
-        $comment->user_id = $_SESSION['user']['id'];
+        $comment->user_id = $this->session->id;
         $comment->comment = $this->request->getPost('comment');
         $comment->post_id = $post_id;
         $comment->save();

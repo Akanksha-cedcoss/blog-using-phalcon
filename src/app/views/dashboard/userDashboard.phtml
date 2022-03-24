@@ -11,7 +11,7 @@ include_once("utility/sidenav.phtml");
         <th scope="col">User Id</th>
         <th scope="col">Name</th>
         <th scope="col">E-mail</th>
-        <?php if ($_SESSION['user']['role'] == 'admin') {
+        <?php if ($this->session->role == 'admin') {
 
           echo '<th scope="col">Role</th>
       <th scope="col">Change Status</th><th>Delete User</th>

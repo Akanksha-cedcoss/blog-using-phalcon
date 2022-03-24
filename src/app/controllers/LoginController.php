@@ -12,12 +12,9 @@ class LoginController extends Controller
             $password =  $this->request->getPost('typePassword');
             $user = Users::findFirst('email = "' . $email . '" and password="' . $password . '"');
             if ($user) {
-                // die('this');
-                $_SESSION['user'] = [
-                    'id' => $user->user_id,
-                    'name' => $user->name,
-                    'role' => $user->role
-                ];
+                $this->session->set('name', $user->name);
+                $this->session->set('role', $user->role);
+                $this->session->set('id', $user->user_id);
                 header("location:../index");
             } else {
                 // return 'this';
@@ -27,7 +24,7 @@ class LoginController extends Controller
     }
     public function logoutAction()
     {
-        unset($_SESSION['user']);
+        $this->session->destroy();
         header("location:../index");
     }
 }

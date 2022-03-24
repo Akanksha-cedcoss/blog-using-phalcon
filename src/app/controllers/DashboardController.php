@@ -11,15 +11,15 @@ class DashboardController extends Controller
     }
     public function userDashboardAction()
     {
-        $_SESSION['user']['role']=='admin'?
+        $this->session->role=='admin'?
         $this->view->users = Users::find():
-        $this->view->user = Users::findFirst($_SESSION['user']['id']);
+        $this->view->user = Users::findFirst($this->session->id);
     }
     public function blogDashboardAction()
     {
-        $this->view->posts = $_SESSION['user']['role']=='admin'?
+        $this->view->posts = $this->session->role=='admin'?
         Posts::find(['order'=>'Date DESC'])
-        :Posts::find(["user_id = ".$_SESSION['user']['id']."",'order' => 'Date DESC',]);
+        :Posts::find(["user_id = ".$this->session->id."",'order' => 'Date DESC',]);
     }
     public function createBlogAction()
     {
@@ -53,7 +53,7 @@ class DashboardController extends Controller
         $post->post_title = $this->request->getPost('title');
         $post->post_img = $this->request->getPost('fileToUpload');
         $post->thumbnail = $this->request->getPost('thumbnail');
-        $post->user_id = $_SESSION['user']['id'];
+        $post->user_id = $this->session->id;
         $post->description = $this->request->getPost('description');
         $post->category_id = (int)$this->request->getPost('category');
         $success = $post->save();
