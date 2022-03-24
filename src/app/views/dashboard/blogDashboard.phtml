@@ -1,0 +1,48 @@
+<?php
+include_once("utility/sidenav.phtml");
+
+?>
+<h2 id="section-title">Blog Dashboard</h2>
+<div class="table-responsive">
+  <div id="table-div"></div>
+  <table class="table table-striped table-sm" id="dashboard-table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Blog Title</th>
+        <th scope="col">Writer Userid</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+        <th scope="col">Category Id</th>
+        <th scope="col">Change Status</th>
+      </tr>
+    </thead>
+    <?php if ($_SESSION['user']['role'] == 'admin') {
+        foreach ($posts as $k => $data) {
+            echo "<tr><td scope='row'>" . $k . "</td>
+            <td>" . $data->post_title . "</td>
+            <td>" . $data->user_id . "</td>
+            <td>" . $data->thumbnail . "</td>
+            <td>" . $data->Date . "</td>
+            <td>" . $data->category_id . "</td>
+            <td>
+            <a href='editPost/" . $data->post_id . "' class='btn btnsm btn-warning " . ($data->status == 'pending' ? 'invisible' : 'visible') . "'>Unpublish</a>
+            <a href='editPost/" . $data->post_id . "' class='btn btnsm btn-success " . ($data->status == 'pending' ? 'visible' : 'invisible') . "'>Publish</a>
+            </td></tr>";
+        }
+    } else {
+      foreach ($posts as $k => $data) {
+        echo "<tr><td scope='row'>" . $k . "</td>
+        <td>" . $data->post_title . "</td>
+        <td>" . $data->user_id . "</td>
+        <td>" . $data->thumbnail . "</td>
+        <td>" . $data->Date . "</td>
+        <td>" . $data->category_id . "</td>
+        </tr>";
+    }
+    }
+    ?>
+  </table>
+  <!-- </div>
+</main><?php
+include_once("utility/footer.phtml");

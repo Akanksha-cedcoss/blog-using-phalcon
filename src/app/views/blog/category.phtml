@@ -1,0 +1,28 @@
+<?php include_once("nav.phtml"); ?>
+<!-- All blogs-->
+<section class="page-section" id="services">
+<div class="nav-item p-2">
+        <a class="nav-link px-3 h5 text-info " href="/index' ?>" id="logout">Back to Main</a>
+      </div>
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Filtered Blogs</h2>
+            <h3 class="section-subheading text-muted">Read all blogs published on our site.</h3>
+        </div>
+        <div class="row text-center" id="blogs">
+            <?php
+            echo (empty($blogs))?'<h1>Sorry, No blogs to show.</h1>':'';
+            foreach ($blogs as $blog) {
+                echo '<div class="col-md-4 col-sm-6 mb-4 mx-5 border">
+                <a class=""  href="http://localhost:8080/blog/index/' . $blog->post_id . '">
+                    <img class="rounded-circle img-fluid" src="/img/thumbnail/' . $blog->post_img . '" alt="..." />
+                    </a><h4 class="my-3">' . $blog->post_title . '</h4>
+                    <h6>' . $blog->Date . '</h6>
+                    <p class="text-muted">' . $blog->thumbnail . '</p>
+                </div>';
+            }
+            ?>
+
+        </div>
+    </div>
+</section>

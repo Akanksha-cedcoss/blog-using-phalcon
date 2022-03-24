@@ -1,0 +1,45 @@
+<?php include_once("utility/sidenav.phtml");?>
+<h2 id="section-title">Publish a new blg</h2>
+<div class="error"></div>
+      <form method="post" action="blogUpload" class="mt-5">
+        <div class="form-group form-outline mb-4">
+          <label class="h3" for="title">Titile of your blog</label>
+          <input type="text" class="form-control" name="title" placeholder="a strong title" required>
+        </div>
+        <hr>
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-group">
+              <label class="h3" for="fileToUpload">Select a thumbnail image</label>
+              <input type="file" name="fileToUpload" class="form-control" id="fileToUpload" placeholder="Image" required>
+            </div>
+
+          </div>
+          <br>
+          <div class="col">
+            <div class="form-group">
+              <label class="h3" for="category">Select category</label>
+              <select class="form-control" name="category">
+                  <?php 
+                    foreach ($category as $k => $data) {
+                        echo '<option value="'.$data->category_id.'">'.$data->name.'</option>';
+                    }
+                  ?>
+               </select>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="h3" for="thumbnail">Short Description</label>
+          <textarea class="form-control rounded-0" name="thumbnail" rows="3" required></textarea>
+        </div>
+      <div class="form-group mb-4">
+          <label class="h3" for="description">Write a blog</label>
+          <textarea class="form-control rounded-0" name="description" rows="10" required></textarea>
+        </div>
+        <input type="submit" id="create-post" class="btn btn-primary btn-lg btn-block" value="Publish now">
+      </form>
+      <?php
+include_once("utility/footer.phtml");

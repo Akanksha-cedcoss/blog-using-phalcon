@@ -1,0 +1,55 @@
+<?php include_once("nav.phtml");
+?>
+    <!-- Page content-->
+    <section class="page-section mt-5" id="services">
+        <div class="container mt-5">
+            <a href="http://localhost:8080/index" class="btn btn-info text-light mt-5">Back to Page</a>
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                          
+                            <h1 class="fw-bolder mb-1"><?php echo $blog[0]->posts->post_title ?></h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">Posted on <?php echo $blog[0]->posts->Date ?> by <?php echo $blog[0]->users->name ?></div>
+                            <!-- Post categories-->
+                            <a class="badge text-decoration-none link-light" href="#!"><?php echo $blog[0]->posts->category_id ?></a>
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded" src="http://localhost:8080/public/img/thumbnail/<?php echo $blog[0]->posts->post_img ?>" alt="..." /></figure>
+                        <!-- Post content-->
+                        <section class="mb-5 py-0">
+                            <h2 class="fw-bolder mb-4 mt-5"><?php echo $blog[0]->posts->thumbnail ?></h2>
+                            <p class="fs-5 mb-4"><?php echo $blog[0]->posts->description ?></p>
+                        </section>
+                    </article>
+                   
+                    <!-- Comments section-->
+                    <section class="mb-5 py-0">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form-->
+                                <form class="mb-4" method="post" action="http://localhost:8080/blog/postComment/<?php echo $blog[0]->posts->post_id ?>">
+                                    <textarea name="comment" class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+                                    <input type="submit" class="btn btn-primary" value="Comment">
+                                </form>
+                                <?php foreach ($comments as $data) {
+                                    echo '<div class="d-flex">
+                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                            <div class="ms-3">
+                                <div class="fw-bold">' . $data->users->name . '</div>
+                                ' . $data->comments->comment . '
+                            </div>
+                        </div>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
